@@ -1,7 +1,8 @@
 #include "model.h"
 
-Sequencer::Sequencer()
+Sequencer::Sequencer(Synth *s)
 {
+	synth = s;
 	playing = true;
 	
 }
@@ -12,8 +13,10 @@ Sequencer::play()
 {
 	while (playing) 
 	{
+		(*synth).play_Note(Note("C"), 1, 100);
 		notify_instruments();
 		sync();
+		(*synth).stop_Note(Note((char *)"C"), 1);
 	}
 }
 
@@ -32,7 +35,7 @@ Sequencer::sync()
 {
 	tick += DTICK;
 	std::cout << tick << "\n";
-	synth.sleep(DTICK);
+	(*synth).sleep(DTICK * 1000);
 }
 
 

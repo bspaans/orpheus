@@ -1,15 +1,15 @@
 class Sequencer {
 
 	public:
-		Sequencer();
+		Sequencer(Synth *s);
 		void play();
 		void stop();
 		void sync();
 		void notify();
 		void attach(Instrument instr);
+		Synth *synth;
 
 	private:
-		Synth synth;
 		std::vector<Instrument> instruments;
 		float tick;
 		bool playing;
