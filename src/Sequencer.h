@@ -11,11 +11,8 @@ class Sequencer {
 	private:
 		std::vector<Instrument> instruments;
 		float tick;
-		int bars;
-		int current_bar;
 		bool playing;
-		void notify_instruments();
-		void instrument_tick();
-		void bar_tick();
 
+		void notify_instruments();
+		void bar_tick();
 };

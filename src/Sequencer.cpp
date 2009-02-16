@@ -2,6 +2,7 @@
 
 Sequencer::Sequencer()
 {
+	playing = true;
 	
 }
 
@@ -9,7 +10,11 @@ Sequencer::Sequencer()
 void
 Sequencer::play()
 {
-	playing = true;
+	while (playing) 
+	{
+		notify_instruments();
+		sync();
+	}
 }
 
 
@@ -21,22 +26,12 @@ Sequencer::stop()
 }
 
 
-void
-Sequencer::instrument_tick()
-{
-	if (playing && current_bar < bars) 
-	{
-		notify_instruments();
-		sync();
-	}
-}
-
-
 
 void
 Sequencer::sync()
 {
 	tick += DTICK;
+	std::cout << tick << "\n";
 	//sleep(DTICK)
 }
 
