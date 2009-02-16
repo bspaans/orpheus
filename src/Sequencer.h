@@ -9,6 +9,7 @@ class Sequencer {
 		void attach(Instrument instr);
 
 	private:
+		Synth synth;
 		std::vector<Instrument> instruments;
 		float tick;
 		bool playing;

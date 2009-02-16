@@ -32,7 +32,7 @@ Sequencer::sync()
 {
 	tick += DTICK;
 	std::cout << tick << "\n";
-	//sleep(DTICK)
+	synth.sleep(DTICK);
 }
 
 
