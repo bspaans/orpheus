@@ -9,13 +9,13 @@ class Sequencer {
 		void attach(Instrument instr);
 
 	private:
-		std::vector<Instrument> instruments[];
-		signed float tick;
+		std::vector<Instrument> instruments;
+		float tick;
 		int bars;
 		int current_bar;
 		bool playing;
 		void notify_instruments();
-		void tick();
+		void instrument_tick();
 		void bar_tick();
 
 };

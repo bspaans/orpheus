@@ -7,7 +7,7 @@ class Instrument {
 
 		std::string name;
 	private:
-		InstrumentOptions options;
-		ImprovisationAlgorithm algorithm;
+		//InstrumentOptions options;
+		//ImprovisationAlgorithm algorithm;
 		int GUID;
 };

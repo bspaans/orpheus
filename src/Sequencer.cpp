@@ -1,7 +1,4 @@
-#include "Sequencer.h"
-#define TICKS_PER_SEC 50.0
-#define DTICK (1.0 / TICKS_PER_SEC)
-
+#include "model.h"
 
 Sequencer::Sequencer()
 {
@@ -9,13 +6,14 @@ Sequencer::Sequencer()
 }
 
 
-
+void
 Sequencer::play()
 {
 	playing = true;
 }
 
 
+void
 Sequencer::stop()
 {
 	playing = false;
@@ -23,7 +21,8 @@ Sequencer::stop()
 }
 
 
-Sequencer::tick()
+void
+Sequencer::instrument_tick()
 {
 	if (playing && current_bar < bars) 
 	{
@@ -32,6 +31,9 @@ Sequencer::tick()
 	}
 }
 
+
+
+void
 Sequencer::sync()
 {
 	tick += DTICK;
@@ -39,6 +41,7 @@ Sequencer::sync()
 }
 
 
+void
 Sequencer::notify()
 {
 
@@ -46,6 +49,7 @@ Sequencer::notify()
 }
 
 
+void
 Sequencer::notify_instruments()
 {
 	std::vector<Instrument>::iterator iter = instruments.begin();
@@ -53,12 +57,12 @@ Sequencer::notify_instruments()
 	while (iter < instruments.end()) 
 	{
 		(*iter).notify();
-		*iter++;
+		iter++;
 	}
 }
 
 
-
+void
 Sequencer::attach(Instrument instr)
 {
 	instruments.push_back(instr);

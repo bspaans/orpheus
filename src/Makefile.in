@@ -47,7 +47,8 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_orpheus_OBJECTS = Sequencer.$(OBJEXT)
+am_orpheus_OBJECTS = main.$(OBJEXT) Sequencer.$(OBJEXT) \
+	Instrument.$(OBJEXT)
 orpheus_OBJECTS = $(am_orpheus_OBJECTS)
 orpheus_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -145,7 +146,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-orpheus_SOURCES = Sequencer.cpp
+orpheus_SOURCES = main.cpp Sequencer.cpp Instrument.cpp
 all: all-am
 
 .SUFFIXES:
@@ -212,7 +213,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Instrument.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Sequencer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
