@@ -2,6 +2,7 @@
 #include <string>
 #include <midi/midi.h>
 #include <iostream>
+#include "Message.h"
 #include "Instrument.h"
 #include "Sequencer.h"
 #define TICKS_PER_SEC 2.0

@@ -5,7 +5,7 @@ class Sequencer {
 		void play();
 		void stop();
 		void sync();
-		void notify();
+		void notify(Message);
 		void attach(Instrument instr);
 		Synth *synth;
 
@@ -14,6 +14,6 @@ class Sequencer {
 		float tick;
 		bool playing;
 
-		void notify_instruments();
+		void notify_instruments(Message);
 		void bar_tick();
 };

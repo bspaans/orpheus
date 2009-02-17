@@ -4,19 +4,19 @@ Sequencer::Sequencer(Synth *s)
 {
 	synth = s;
 	playing = true;
-	
+	tick = 0.0;
 }
 
 
 void
 Sequencer::play()
 {
+	Message msg(PLAY);
 	while (playing) 
 	{
-		(*synth).play_Note(Note("C"), 1, 100);
-		notify_instruments();
+		msg.ivalue = tick;
+		notify_instruments(msg);
 		sync();
-		(*synth).stop_Note(Note((char *)"C"), 1);
 	}
 }
 
@@ -33,28 +33,29 @@ Sequencer::stop()
 void
 Sequencer::sync()
 {
-	tick += DTICK;
-	std::cout << tick << "\n";
+	tick++;
 	(*synth).sleep(DTICK * 1000);
 }
 
 
 void
-Sequencer::notify()
+Sequencer::notify(Message msg)
 {
-
-
+	if (msg.mtype == PLAY)
+	{
+		(*synth).play_NoteContainer(msg.notes, 1, 75);
+	}
 }
 
 
 void
-Sequencer::notify_instruments()
+Sequencer::notify_instruments(Message msg)
 {
 	std::vector<Instrument>::iterator iter = instruments.begin();
 
 	while (iter < instruments.end()) 
 	{
-		(*iter).notify();
+		(*iter).notify(msg);
 		iter++;
 	}
 }
