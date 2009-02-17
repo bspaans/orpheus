@@ -8,6 +8,8 @@ class Sequencer {
 		void notify(Message);
 		void attach(Instrument instr);
 		Synth *synth;
+		float bpm;
+
 
 	private:
 		std::vector<Instrument> instruments;

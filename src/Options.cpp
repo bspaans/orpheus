@@ -9,6 +9,7 @@ Options::Options()
 	bpm = 120;
 	driver = "";
 	soundfont = "default.sf2";
+	verbose = false;
 }
 
 
@@ -19,32 +20,35 @@ Options::parse_cli_arguments(int argc, char **argv)
 
 	opterr = 0;
 
-	while (( c = getopt(argc, argv, 
-		"b:d:s:")) != -1)
+	while (( c = getopt(argc, argv, "b:d:s:v")) != -1)
 		switch(c) 
 		{
-			case 'b':
-				bpm = atof(optarg);
-				break;
-			case 's':
-				soundfont = optarg;
-				break;
-			case 'd':
-				driver = optarg;
-				break;
+			case 'b': bpm = atof(optarg); break;
+			case 'd': driver = optarg; break;
+			case 's': soundfont = optarg; break;
+			case 'v': verbose = true; break;
 		}
+}
 
-	std::cout << bpm << '\n';
-	std::cout << driver << '\n';
-	std::cout << soundfont << '\n';
+
+void
+Options::output_options()
+{
+	std::cout << "============================================================================\n\n";
+	std::cout << "Driver: " << driver << '\n';
+	std::cout << "Soundfont: " << soundfont << '\n';
+	std::cout << "Bpm: " << bpm << "\n\n";
+	std::cout << "============================================================================\n\n";
 }
 
 
 Sequencer
 Options::get_sequencer()
 {
+	if (verbose) output_options();
 	synth.init(driver, soundfont);
 	Sequencer s(&synth);
+	s.bpm = bpm;
 	return s;
 }
 

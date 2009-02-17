@@ -33,8 +33,16 @@ Sequencer::stop()
 void
 Sequencer::sync()
 {
-	tick++;
-	(*synth).sleep(DTICK * 1000);
+	tick += 0.01;
+	(*synth).sleep(10);
+	std::vector<Instrument>::iterator iter = instruments.begin();
+
+	float dtick = 4.0 / (0.01 / (60.0 / bpm));
+	while (iter < instruments.end()) 
+	{
+		(*iter).duration = subtract_values((*iter).duration, dtick);
+		iter++;
+	}
 }
 
 
@@ -55,7 +63,8 @@ Sequencer::notify_instruments(Message msg)
 
 	while (iter < instruments.end()) 
 	{
-		(*iter).notify(msg);
+		if ((*iter).duration <= 0.0)
+			(*iter).notify(msg);
 		iter++;
 	}
 }

@@ -1,6 +1,13 @@
 #include "model.h"
 
 
+Instrument::Instrument()
+{
+	duration = 0.0;
+}
+
+
+
 void
 Instrument::notify(Message msg)
 {
@@ -19,6 +26,7 @@ Instrument::play()
 	n.add_note((char *)"C#");
 	n.add_note((char *)"E#");
 	n.add_note((char *)"F");
+	duration = 8;
 	msg.notes = n;
 	notify_instruments(msg);
 	notify_sequencer(msg);

@@ -3,6 +3,7 @@ extern "C" class Sequencer;
 class Instrument {
 
 	public:
+		Instrument();
 		void play();
 		void attach(Instrument instr);
 		void attach(Sequencer *sequencer);
@@ -11,6 +12,7 @@ class Instrument {
 		std::string name;
 		std::vector<Instrument> following_instr;
 		Sequencer *seq;
+		float duration;
 	private:
 		//InstrumentOptions options;
 		//ImprovisationAlgorithm algorithm;
