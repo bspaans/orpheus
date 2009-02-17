@@ -50,7 +50,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_orpheus_OBJECTS = main.$(OBJEXT) Sequencer.$(OBJEXT) \
-	Instrument.$(OBJEXT) Message.$(OBJEXT)
+	Instrument.$(OBJEXT) Message.$(OBJEXT) Options.$(OBJEXT)
 orpheus_OBJECTS = $(am_orpheus_OBJECTS)
 orpheus_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -178,7 +178,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-orpheus_SOURCES = main.cpp Sequencer.cpp Instrument.cpp Message.cpp
+orpheus_SOURCES = main.cpp Sequencer.cpp Instrument.cpp Message.cpp Options.cpp
 all: all-am
 
 .SUFFIXES:
@@ -252,6 +252,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Instrument.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Message.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Options.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Sequencer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 

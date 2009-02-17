@@ -5,11 +5,10 @@ int
 main(int argc, char **argv)
 {
 	cout << "Oprheus 0.1, Copyright (C) 2009, Bart Spaans\n";
+	Options o;
+	o.parse_cli_arguments(argc, argv);
 
-
-	Synth synth;
-	synth.init("alsa", "/home/bspaans/workspace/fluidsynth/ChoriumRevA.SF2");
-	Sequencer s(&synth);
+	Sequencer s = o.get_sequencer();
 
 	Instrument i;
 	Instrument i2;
