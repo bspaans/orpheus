@@ -9,12 +9,20 @@ NoteContainer
 RockDrum::get_notes()
 {
 	NoteContainer n;
-	n.add_note(Note("A#", 2));
+	if (RANDOM() <= 0.9)
+		n.add_note(Note((char *)"A#", 2));
 
 	if (counter == 1)
-		n.add_note(Note("C", 2));
+		n.add_note(Note((char *)"C", 2));
 	else if (counter == 5)
-		n.add_note(Note("E", 2));
+		n.add_note(Note((char *)"E", 2));
+	else if (counter >= 7)
+	{
+		if (RANDOM() <= 0.2)
+			n.add_note(Note((char *)"B", 2));
+		else if (RANDOM() <= 0.2)
+			n.add_note(Note((char *)"A", 2));
+	}
 
 	counter++;
 	if (counter > 8)

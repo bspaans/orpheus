@@ -46,8 +46,10 @@ Instrument::play()
 void
 Instrument::follow(NoteContainer n, float dur, int chan)
 {
-	n.notes[0].octave++;
-	duration = 8;
+	if (n.notes.size() != 0)
+		n.notes[0].octave++;
+
+	duration = dur;
 	Message msg(PLAY);
 	msg.notes = n;
 	msg.ivalue = channel;
