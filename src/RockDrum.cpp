@@ -9,11 +9,15 @@ NoteContainer
 RockDrum::get_notes()
 {
 	NoteContainer n;
-	if (RANDOM() <= 0.9)
+	if (RANDOM() <= 0.1)
+		n.add_note(Note((char *)"A#", 2));
+	else if (RANDOM() <= 0.1)
 		n.add_note(Note((char *)"A#", 2));
 
-	if (counter == 1)
+	if (counter == 1){
 		n.add_note(Note((char *)"C", 2));
+		n.add_note(Note((char *)"C#", 3));
+	}
 	else if (counter == 5)
 		n.add_note(Note((char *)"E", 2));
 	else if (counter >= 7)
@@ -34,5 +38,9 @@ RockDrum::get_notes()
 float
 RockDrum::get_duration()
 {	
-	return 8.0;
+	// swing
+	if (counter % 2 == 0)
+		return triplet(8.0);
+	else
+		return subtract_values(8.0, triplet(8.0));
 }

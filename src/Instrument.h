@@ -1,5 +1,11 @@
 extern "C" class Sequencer;
 
+enum follow {
+	NO_FOLLOW,
+	FOLLOW_RHYTHM,
+	FOLLOW_MELODY,
+};
+
 class Instrument {
 
 	public:
@@ -16,6 +22,8 @@ class Instrument {
 		float duration;
 		int channel;
 		ImprovisationAlgorithm *algorithm;
+		enum follow following; 
+
 	private:
 		//InstrumentOptions options;
 		int GUID;

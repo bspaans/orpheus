@@ -6,6 +6,7 @@ Instrument::Instrument()
 	duration = 0.0;
 	algorithm = NULL;
 	channel = 1;
+	following = NO_FOLLOW;
 }
 
 
@@ -16,11 +17,9 @@ Instrument::notify(Message msg)
 	switch(msg.mtype)
 	{
 		case PLAY:
-			play();
-			break;
+			play(); break;
 		case FOLLOW:
-			follow(msg.notes, msg.fvalue, msg.ivalue);
-			break;
+			follow(msg.notes, msg.fvalue, msg.ivalue); break;
 	}
 }
 
@@ -29,7 +28,7 @@ Instrument::notify(Message msg)
 void
 Instrument::play()
 {
-	if (algorithm != NULL) 
+	if (following == NO_FOLLOW && algorithm != NULL) 
 	{
 		Message msg(FOLLOW);
 		msg.notes = (*algorithm).get_notes();
@@ -46,14 +45,32 @@ Instrument::play()
 void
 Instrument::follow(NoteContainer n, float dur, int chan)
 {
-	if (n.notes.size() != 0)
-		n.notes[0].octave++;
 
-	duration = dur;
-	Message msg(PLAY);
-	msg.notes = n;
-	msg.ivalue = channel;
-	notify_sequencer(msg);
+	if (following == FOLLOW_RHYTHM && algorithm != NULL)
+	{
+		Message msg(FOLLOW);
+		if (n.notes.size() != 0)
+			msg.notes = (*algorithm).get_notes();
+		else
+			msg.notes = n;
+		duration = dur;
+		msg.ivalue = channel;
+		msg.fvalue = duration;
+		notify_instruments(msg);
+		msg.mtype = PLAY;
+		notify_sequencer(msg);
+	}
+	else if (following == FOLLOW_MELODY)
+	{
+		Message msg(FOLLOW);
+		msg.notes = n;
+		duration = dur;
+		msg.ivalue = channel;
+		msg.fvalue = duration;
+		notify_instruments(msg);
+		msg.mtype = PLAY;
+		notify_sequencer(msg);
+	}
 }
 
 void

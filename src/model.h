@@ -8,6 +8,7 @@
 
 #include "ImprovisationAlgorithm.h"
 #include "RockDrum.h"
+#include "RandomSoloist.h"
 #include "Options.h"
 #include "Message.h"
 #include "Instrument.h"

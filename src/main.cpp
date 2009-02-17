@@ -4,7 +4,7 @@ using namespace std;
 int
 main(int argc, char **argv)
 {
-	cout << "Oprheus 0.1, Copyright (C) 2009, Bart Spaans\n";
+	cout << "Orpheus 0.1, Copyright (C) 2009, Bart Spaans\n";
 	Options o;
 	o.parse_cli_arguments(argc, argv);
 
@@ -13,8 +13,13 @@ main(int argc, char **argv)
 	Instrument i;
 	Instrument i2;
 	RockDrum r;
+	RandomSoloist ra;
+
 	i.algorithm = &r;
 	i.channel = 9;
+	i2.algorithm = &ra;
+
+	i2.following = FOLLOW_MELODY;
 	std::string iname("Instrument");
 	std::string i2name("Instr");
 	i.name = iname;
