@@ -46,27 +46,24 @@ void
 Instrument::follow(NoteContainer n, float dur, int chan)
 {
 
+	Message msg(FOLLOW);
+	msg.ivalue = channel;
+	msg.fvalue = duration;
+	duration = dur;
+	msg.notes = n;
+
 	if (following == FOLLOW_RHYTHM && algorithm != NULL)
 	{
-		Message msg(FOLLOW);
 		if (n.notes.size() != 0)
 			msg.notes = (*algorithm).get_notes();
-		else
-			msg.notes = n;
-		duration = dur;
-		msg.ivalue = channel;
-		msg.fvalue = duration;
+
 		notify_instruments(msg);
 		msg.mtype = PLAY;
 		notify_sequencer(msg);
 	}
 	else if (following == FOLLOW_MELODY)
 	{
-		Message msg(FOLLOW);
-		msg.notes = n;
-		duration = dur;
-		msg.ivalue = channel;
-		msg.fvalue = duration;
+
 		notify_instruments(msg);
 		msg.mtype = PLAY;
 		notify_sequencer(msg);

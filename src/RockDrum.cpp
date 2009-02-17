@@ -38,9 +38,5 @@ RockDrum::get_notes()
 float
 RockDrum::get_duration()
 {	
-	// swing
-	if (counter % 2 == 0)
-		return triplet(8.0);
-	else
-		return subtract_values(8.0, triplet(8.0));
+	return 8;
 }
