@@ -4,6 +4,8 @@
 Instrument::Instrument()
 {
 	duration = 0.0;
+	algorithm = NULL;
+	channel = 1;
 }
 
 
@@ -11,9 +13,15 @@ Instrument::Instrument()
 void
 Instrument::notify(Message msg)
 {
-	std::cout << name << msg.ivalue << '\n';
-	if (msg.mtype == PLAY)
-		play();
+	switch(msg.mtype)
+	{
+		case PLAY:
+			play();
+			break;
+		case FOLLOW:
+			follow(msg.notes, msg.fvalue, msg.ivalue);
+			break;
+	}
 }
 
 
@@ -21,18 +29,30 @@ Instrument::notify(Message msg)
 void
 Instrument::play()
 {
-	Message msg(PLAY);
-	NoteContainer n;
-	n.add_note((char *)"C#");
-	n.add_note((char *)"E#");
-	n.add_note((char *)"F");
-	duration = 8;
-	msg.notes = n;
-	notify_instruments(msg);
-	notify_sequencer(msg);
+	if (algorithm != NULL) 
+	{
+		Message msg(FOLLOW);
+		msg.notes = (*algorithm).get_notes();
+		duration = (*algorithm).get_duration();
+		msg.ivalue = channel;
+		msg.fvalue = duration;
+		notify_instruments(msg);
+		msg.mtype = PLAY;
+		notify_sequencer(msg);
+	}
 }
 
 
+void
+Instrument::follow(NoteContainer n, float dur, int chan)
+{
+	n.notes[0].octave++;
+	duration = 8;
+	Message msg(PLAY);
+	msg.notes = n;
+	msg.ivalue = channel;
+	notify_sequencer(msg);
+}
 
 void
 Instrument::attach(Instrument instr)
@@ -66,5 +86,6 @@ Instrument::notify_instruments(Message msg)
 void
 Instrument::notify_sequencer(Message msg)
 {
-	(*seq).notify(msg);
+	if (seq != NULL)
+		(*seq).notify(msg);
 }

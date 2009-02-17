@@ -12,12 +12,16 @@ main(int argc, char **argv)
 
 	Instrument i;
 	Instrument i2;
+	RockDrum r;
+	i.algorithm = &r;
+	i.channel = 9;
 	std::string iname("Instrument");
 	std::string i2name("Instr");
 	i.name = iname;
 	i2.name = i2name;
 	i.attach(&s);
 	i2.attach(&s);
+	i.attach(i2);
 	s.attach(i);
 	s.attach(i2);
 

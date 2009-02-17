@@ -1,6 +1,7 @@
 typedef enum msg_type {
 	PLAY,
-	STOP
+	FOLLOW,
+	CHANGE_BPM,
 } msg_type;
 
 class Message {

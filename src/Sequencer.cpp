@@ -35,9 +35,8 @@ Sequencer::sync()
 {
 	tick += 0.01;
 	(*synth).sleep(10);
-	std::vector<Instrument>::iterator iter = instruments.begin();
-
 	float dtick = 4.0 / (0.01 / (60.0 / bpm));
+	std::vector<Instrument>::iterator iter = instruments.begin();
 	while (iter < instruments.end()) 
 	{
 		(*iter).duration = subtract_values((*iter).duration, dtick);
@@ -51,7 +50,7 @@ Sequencer::notify(Message msg)
 {
 	if (msg.mtype == PLAY)
 	{
-		(*synth).play_NoteContainer(msg.notes, 1, 75);
+		(*synth).play_NoteContainer(msg.notes, msg.ivalue, 75);
 	}
 }
 

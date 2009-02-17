@@ -1,5 +1,8 @@
 class ImprovisationAlgorithm {
 
 	public:
-		NoteContainer get_notes(float tick);
+		ImprovisationAlgorithm();
+		~ImprovisationAlgorithm();
+		virtual NoteContainer get_notes() { };
+		virtual float get_duration() { };
 };
