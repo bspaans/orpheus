@@ -14,15 +14,19 @@ main(int argc, char **argv)
 	// Initialize instruments
 	Instrument i;
 	Instrument i2;
+	Instrument i3;
 
 
 	Swing8 r;
 	RandomSoloist ra;
+	RockDrum rd;
 
 
 	i.algorithm = &r;
-	i.channel = 9;
 	i2.algorithm = &ra;
+	i3.algorithm = &rd;
+
+	i3.channel = 9;
 
 	i2.following = FOLLOW_MELODY;
 	std::string iname("Instrument");
@@ -32,10 +36,12 @@ main(int argc, char **argv)
 
 	i.attach(&s);
 	i2.attach(&s);
+	i3.attach(&s);
 
 	i.attach(i2);
 	s.attach(i);
 	s.attach(i2);
+	s.attach(i3);
 
 
 	s.play();
