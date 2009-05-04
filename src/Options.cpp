@@ -47,7 +47,7 @@ Options::get_sequencer()
 {
 	if (verbose) output_options();
 	synth.init(driver, soundfont);
-	Sequencer s(&synth);
+	Sequencer s(&synth, this);
 	s.bpm = bpm;
 	return s;
 }

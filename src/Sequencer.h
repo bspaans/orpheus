@@ -1,7 +1,7 @@
 class Sequencer {
 
 	public:
-		Sequencer(Synth *s);
+		Sequencer(Synth *s, Options *o);
 		void play();
 		void stop();
 		void sync();
@@ -12,6 +12,7 @@ class Sequencer {
 
 
 	private:
+		Options *options;
 		std::vector<Instrument> instruments;
 		float tick;
 		bool playing;

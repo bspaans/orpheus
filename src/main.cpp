@@ -29,16 +29,18 @@ main(int argc, char **argv)
 	i3.channel = 9;
 
 	i2.following = FOLLOW_MELODY;
-	std::string iname("Instrument");
-	std::string i2name("Instr");
-	i.name = iname;
-	i2.name = i2name;
+	i3.following = FOLLOW_RHYTHM;
+
+	i.name = std::string("Eight note swing pattern");
+	i2.name = std::string("Random Soloist");
+	i3.name = std::string("Drum");
 
 	i.attach(&s);
 	i2.attach(&s);
 	i3.attach(&s);
 
 	i.attach(i2);
+	i.attach(i3);
 	s.attach(i);
 	s.attach(i2);
 	s.attach(i3);

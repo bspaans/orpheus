@@ -1,10 +1,11 @@
 #include "model.h"
 
-Sequencer::Sequencer(Synth *s)
+Sequencer::Sequencer(Synth *s, Options *o)
 {
 	synth = s;
 	playing = true;
 	tick = 0.0;
+	options = o;
 }
 
 
@@ -63,7 +64,9 @@ Sequencer::notify_instruments(Message msg)
 	while (iter < instruments.end()) 
 	{
 		if ((*iter).duration <= 0.0)
+		{
 			(*iter).notify(msg);
+		}
 		iter++;
 	}
 }
