@@ -8,13 +8,15 @@ main(int argc, char **argv)
 	Options o;
 	o.parse_cli_arguments(argc, argv);
 
+	// Get sequencer from options
 	Sequencer s = o.get_sequencer();
 
+	// Initialize instruments
 	Instrument i;
 	Instrument i2;
 
 
-	RockDrum r;
+	Swing8 r;
 	RandomSoloist ra;
 
 
